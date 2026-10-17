@@ -1,0 +1,88 @@
+@import './base.css';
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Amiri;
+    src: url(./fonts/Amiri/Amiri-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Amiri;
+    src: url(./fonts/Amiri/Amiri-Bold.ttf) format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+html, body {
+    overflow-x: clip;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Amiri', system-ui, sans-serif;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: var(--bg);
+    -webkit-tap-highlight-color: transparent; /* Chrome, Safari, iOS */
+    outline: none; /* Firefox و متصفحات أخرى */
+    user-select: none; /* no text selection */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(40vmax 40vmax at 15% 10%,
+            color-mix(in srgb, var(--primary) 28%, transparent), transparent 70%),
+        radial-gradient(45vmax 45vmax at 90% 35%,
+            color-mix(in srgb, var(--warning) 18%, transparent), transparent 70%),
+        radial-gradient(50vmax 50vmax at 30% 95%,
+            color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%);
+    filter: blur(40px);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+@media (max-width: 600px) {
+    main { padding: 0.5rem; }
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: 0.4s;
+    padding: 3px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    color: var(--text-primary)
+}

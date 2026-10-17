@@ -1,0 +1,31 @@
+
+:root {
+    /* Backgrounds */
+    --bg: #17120F;
+    --surface: #211A16;
+    --surface-elevated: #30241D;
+
+    /* Brand colors */
+    --primary: #D6A16F;
+    --secondary: #806B5C;
+    --progress-bar-bg: #3A2C24;
+
+    /* Components */
+    --card: var(--surface);
+    --items: var(--surface-elevated);
+    --border-radius: 10px;
+
+    /* Text */
+    --text-primary: #F0E7DF;
+    --text-secondary: #B9A89B;
+
+    /* Status colors */
+    --success: #78B88A;
+    --warning: #E9BC70;
+    --danger: #E98278;
+    --info: #83B8DC;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
