@@ -1,5 +1,9 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('node:path')
+import { readFileSync } from 'node:fs'
+
+const cfg = JSON.parse(readFileSync(new URL('../app.config.json', import.meta.url)))
+app.setAppUserModelId(cfg.appId)
 
 function createWindow() {
     const win = new BrowserWindow({

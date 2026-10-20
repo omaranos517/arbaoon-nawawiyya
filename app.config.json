@@ -1,6 +1,8 @@
 {
-    "appId": "com.omaranos.arbaoon_nawawiyya",
+    "appId": "io.github.omaranos517.arbaoonnawawiyya",
     "appName": "الأربعون النووية",
-    "version": "0.1.0",
+    "executable": "arbaoon-nawawiyya",
+    "author": "Omar Anoss",
+    "homepage": "https://github.com/omaranos517/arbaoon-nawawiyya",
     "icon": "assets/icon.png"
 }

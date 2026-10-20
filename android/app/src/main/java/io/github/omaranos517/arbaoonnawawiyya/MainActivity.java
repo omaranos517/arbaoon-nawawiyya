@@ -1,4 +1,4 @@
-package com.omaranos.arbaoon_nawawiyya;
+package io.github.omaranos517.arbaoonnawawiyya;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -1,3 +1,4 @@
+<!-- This page is vibe-coded and need to be rewroten -->
 <script setup>
 import Header from '../components/Header.vue'
 

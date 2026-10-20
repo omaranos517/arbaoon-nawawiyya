@@ -12,7 +12,13 @@
     "preview": "vite preview",
     "format": "prettier --write --experimental-cli src/",
     "electron": "electron .",
-    "electron:dev": "concurrently -k \"vite --host 127.0.0.1\" \"electron .\""
+    "electron:dev": "concurrently -k \"vite --host 127.0.0.1\" \"electron .\"",
+    "build:web": "vite build --mode web",
+    "build:app": "vite build --mode app",
+    "gen": "node scripts/gen-packaging.mjs",
+    "android": "npm run build:app && node scripts/gen-capacitor.mjs && cap sync android",
+    "electron:win": "npm run build:app && electron-builder --win --config electron-builder.config.mjs",
+    "electron:linux": "npm run build:app && electron-builder --linux --config electron-builder.config.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.3",
@@ -28,6 +34,9 @@
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",
     "@vitejs/plugin-vue": "^6.0.8",
+    "concurrently": "^10.0.6",
+    "electron": "^44.9.0",
+    "electron-builder": "^26.15.3",
     "prettier": "3.9.6",
     "vite": "^8.2.2",
     "vite-plugin-vue-devtools": "^8.2.1"

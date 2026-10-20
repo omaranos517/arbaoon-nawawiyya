@@ -1,6 +1,18 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { computed } from 'vue'
+import { useRoute, useRouter, RouterLink } from 'vue-router'
 import InfoIcon from './icons/infoIcon.vue'
+
+const route = useRoute()
+const router = useRouter()
+let isAboutPage = computed(() => route.name === 'about')
+function handleAboutClick() {
+    if (isAboutPage.value) {
+        router.back()
+    } else {
+        router.push('/about')
+    }
+}
 </script>
 <template>
     <header>
@@ -8,7 +20,7 @@ import InfoIcon from './icons/infoIcon.vue'
             <RouterLink to="/" class="logo-text"><h1>الأربعون النووية</h1></RouterLink>
         </div>
             <nav>
-            <RouterLink class="about-link" to="/about" aria-label="عن التطبيق"><InfoIcon /></RouterLink>
+            <button class="about-link" @click="handleAboutClick" aria-label="عن التطبيق"><InfoIcon /></button>
             </nav>
     </header>
 </template>
@@ -112,6 +124,10 @@ import InfoIcon from './icons/infoIcon.vue'
     .about-link {
         display: flex;
         color: white;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
         transition: color 0.2s ease;
     }
 

@@ -1,6 +1,5 @@
 {
-  "appId": "com.omaranos.arbaoon_nawawiyya",
+  "appId": "io.github.omaranos517.arbaoonnawawiyya",
   "appName": "الأربعون النووية",
-  "version": "0.1.0",
   "webDir": "dist"
 }
