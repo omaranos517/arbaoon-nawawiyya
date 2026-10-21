@@ -30,7 +30,7 @@ import Header from '../components/Header.vue'
 
     .hero h2 {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         font-weight: 700;
         background-image: linear-gradient(
             to top,
@@ -41,6 +41,11 @@ import Header from '../components/Header.vue'
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+        padding: 0 20px;
+        font-size: 1.5rem;
     }
 
     .grid {

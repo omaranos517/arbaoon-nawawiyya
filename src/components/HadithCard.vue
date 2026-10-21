@@ -23,7 +23,7 @@ const props = defineProps({
         padding: 1.25rem 1rem;
         background-color: var(--card);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
+        border-radius: 999px;
         text-decoration: none;
         color: var(--text-primary);
         transition: border-color 0.2s ease, transform 0.2s ease;
@@ -40,7 +40,7 @@ const props = defineProps({
         height: 48px;
         display: grid;
         place-items: center;
-        border-radius: 10px;
+        border-radius: 100%;
         background: var(--primary);
         color: #5e3901;
         font-size: 1.25rem;
@@ -55,13 +55,13 @@ const props = defineProps({
     }
 
     small {
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         color: #8b949e;
     }
 
     h2 {
         margin: 0;
-        font-size: 1.05rem;
+        font-size: 1.07rem;
         font-weight: 700;
         line-height: 1.5;
     }

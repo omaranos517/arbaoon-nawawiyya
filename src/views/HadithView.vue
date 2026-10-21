@@ -274,10 +274,6 @@ onBeforeUnmount(() => {
         transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.4s ease;
     }
 
-    .head.compact {
-        padding: 0.4rem 0;
-    }
-
     .head.compact .home-btn,
     .head.compact .options-btn {
         width: 3rem;
@@ -290,8 +286,6 @@ onBeforeUnmount(() => {
     }
 
     .head.compact p {
-        max-height: 0;
-        margin-top: 0;
         opacity: 0;
     }
 
@@ -376,7 +370,7 @@ onBeforeUnmount(() => {
         justify-content: space-between;
         min-height: 4.5rem;
         gap: 1rem;
-        margin-top: 0.5rem;
+        margin-top: auto;
         padding: 0.75rem 0;
         width: 100%;
         background: var(--background);
@@ -387,11 +381,11 @@ onBeforeUnmount(() => {
         align-items: center;
         justify-content: center;
         gap: 0;
-        padding: 0.5rem 0.75rem;
-        background: var(--card);
+        padding: 0.75rem 1.25rem;
+        background: var(--surface-elevated);
         color: var(--text-primary);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
+        border-radius: 999px;
         font-size: 1.05rem;
         font-weight: 600;
         text-decoration: none;
@@ -401,11 +395,6 @@ onBeforeUnmount(() => {
             gap 0.4s ease,
             background-color 0.2s ease,
             color 0.2s ease;
-    }
-
-    .navication-buttons.expanded .navicate {
-        gap: 0.5rem;
-        padding: 0.75rem 1.25rem;
     }
 
     .navicate.disabled {
@@ -420,6 +409,11 @@ onBeforeUnmount(() => {
         overflow: hidden;
         white-space: nowrap;
         transition: max-width 0.4s ease, opacity 0.3s ease;
+    }
+
+    .navication-buttons.expanded .navicate {
+        background: var(--card);
+        border-radius: 10px;
     }
 
     .navication-buttons.expanded .label {

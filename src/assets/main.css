@@ -61,6 +61,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
+    min-height: 100dvh;
     max-width: 900px;
     margin: 0 auto;
     padding: 1rem;
