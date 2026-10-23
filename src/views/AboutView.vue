@@ -12,12 +12,13 @@ const projectRepositoryUrl = 'https://github.com/omaranos517/REPOSITORY-NAME'
             <p class="eyebrow">نبذة عني</p>
             <h1>أنا عمر عنوس</h1>
             <p class="description">
-                مبرمج ومطوّر ويب من الإسكندرية، مصر. أعمل بـ HTML وCSS وJavaScript
-                وPHP وPython، وأتعلّم Laravel. أهتم أيضاً بتطوير الألعاب والتكنولوجيا
-                والطاقة المتجددة.
+                مبرمج ومطوّر ويب من الإسكندرية، مصر. أعمل بـ HTML وCSS وJavaScript وPHP وPython،
+                وأتعلّم Laravel. أهتم أيضاً بتطوير الألعاب والتكنولوجيا والطاقة المتجددة.
             </p>
             <div class="links" aria-label="روابط التواصل">
-                <a href="mailto:omaranos517@gmail.com">راسلني عبر البريد <span aria-hidden="true">↗</span></a>
+                <a href="mailto:omaranos517@gmail.com"
+                    >راسلني عبر البريد <span aria-hidden="true">↗</span></a
+                >
                 <a href="https://wa.me/201277633481" target="_blank" rel="noreferrer">
                     تواصل عبر واتساب <span aria-hidden="true">↗</span>
                 </a>
@@ -31,8 +32,8 @@ const projectRepositoryUrl = 'https://github.com/omaranos517/REPOSITORY-NAME'
             <p class="eyebrow">عن التطبيق</p>
             <h2>الأربعون النووية</h2>
             <p class="description">
-                تطبيق يجمع أحاديث الأربعين النووية، ويتيح قراءة نص الحديث وشرحه
-                والتعرّف على راويه، بواجهة عربية مريحة وسهلة الاستخدام.
+                تطبيق يجمع أحاديث الأربعين النووية، ويتيح قراءة نص الحديث وشرحه والتعرّف على راويه،
+                بواجهة عربية مريحة وسهلة الاستخدام.
             </p>
             <a
                 class="repository-link"
@@ -60,7 +61,11 @@ const projectRepositoryUrl = 'https://github.com/omaranos517/REPOSITORY-NAME'
     border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
     border-radius: 18px;
     background:
-        radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 45%),
+        radial-gradient(
+            circle at 100% 0%,
+            color-mix(in srgb, var(--primary) 9%, transparent),
+            transparent 45%
+        ),
         var(--surface);
 }
 
@@ -102,7 +107,9 @@ h2 {
     border-radius: 9px;
     color: var(--text-primary);
     font-size: 0.92rem;
-    transition: border-color 180ms ease, background-color 180ms ease;
+    transition:
+        border-color 180ms ease,
+        background-color 180ms ease;
 }
 
 .links a:hover,

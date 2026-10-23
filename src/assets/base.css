@@ -1,14 +1,13 @@
-
 :root {
     /* Backgrounds */
-    --bg: #17120F;
-    --surface: #211A16;
-    --surface-elevated: #30241D;
+    --bg: #17120f;
+    --surface: #211a16;
+    --surface-elevated: #30241d;
 
     /* Brand colors */
-    --primary: #D6A16F;
-    --secondary: #806B5C;
-    --progress-bar-bg: #3A2C24;
+    --primary: #d6a16f;
+    --secondary: #806b5c;
+    --progress-bar-bg: #3a2c24;
 
     /* Components */
     --card: var(--surface);
@@ -16,16 +15,18 @@
     --border-radius: 10px;
 
     /* Text */
-    --text-primary: #F0E7DF;
-    --text-secondary: #B9A89B;
+    --text-primary: #f0e7df;
+    --text-secondary: #b9a89b;
 
     /* Status colors */
-    --success: #78B88A;
-    --warning: #E9BC70;
-    --danger: #E98278;
-    --info: #83B8DC;
+    --success: #78b88a;
+    --warning: #e9bc70;
+    --danger: #e98278;
+    --info: #83b8dc;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }

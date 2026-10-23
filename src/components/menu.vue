@@ -17,8 +17,13 @@ const onItem = (item) => {
     <Teleport to="body">
         <Transition name="menu">
             <div v-if="open" class="menu-backdrop" @click="emit('close')">
-                <ul class="menu" role="menu" dir="rtl" @click.stop
-                    :style="{ top: pos.top + 'px', left: pos.left + 'px' }">
+                <ul
+                    class="menu"
+                    role="menu"
+                    dir="rtl"
+                    @click.stop
+                    :style="{ top: pos.top + 'px', left: pos.left + 'px' }"
+                >
                     <li v-for="item in items" :key="item.key">
                         <button role="menuitem" @click="onItem(item)">{{ item.label }}</button>
                     </li>
@@ -60,10 +65,24 @@ const onItem = (item) => {
     cursor: pointer;
 }
 
-.menu button:hover { background: var(--surface-elevated); }
+.menu button:hover {
+    background: var(--surface-elevated);
+}
 
-.menu-enter-active, .menu-leave-active { transition: opacity 0.15s ease; }
-.menu-enter-active .menu, .menu-leave-active .menu { transition: transform 0.15s ease; }
-.menu-enter-from, .menu-leave-to { opacity: 0; }
-.menu-enter-from .menu, .menu-leave-to .menu { transform: scale(0.95); }
+.menu-enter-active,
+.menu-leave-active {
+    transition: opacity 0.15s ease;
+}
+.menu-enter-active .menu,
+.menu-leave-active .menu {
+    transition: transform 0.15s ease;
+}
+.menu-enter-from,
+.menu-leave-to {
+    opacity: 0;
+}
+.menu-enter-from .menu,
+.menu-leave-to .menu {
+    transform: scale(0.95);
+}
 </style>

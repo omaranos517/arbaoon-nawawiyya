@@ -22,7 +22,8 @@
     font-display: swap;
 }
 
-html, body {
+html,
+body {
     overflow-x: clip;
     max-width: 100%;
     margin: 0;
@@ -41,18 +42,27 @@ body {
 }
 
 body::before {
-    content: "";
+    content: '';
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
     background:
-        radial-gradient(40vmax 40vmax at 15% 10%,
-            color-mix(in srgb, var(--primary) 28%, transparent), transparent 70%),
-        radial-gradient(45vmax 45vmax at 90% 35%,
-            color-mix(in srgb, var(--warning) 18%, transparent), transparent 70%),
-        radial-gradient(50vmax 50vmax at 30% 95%,
-            color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%);
+        radial-gradient(
+            40vmax 40vmax at 15% 10%,
+            color-mix(in srgb, var(--primary) 28%, transparent),
+            transparent 70%
+        ),
+        radial-gradient(
+            45vmax 45vmax at 90% 35%,
+            color-mix(in srgb, var(--warning) 18%, transparent),
+            transparent 70%
+        ),
+        radial-gradient(
+            50vmax 50vmax at 30% 95%,
+            color-mix(in srgb, var(--primary) 16%, transparent),
+            transparent 70%
+        );
     filter: blur(40px);
 }
 
@@ -68,7 +78,9 @@ main {
 }
 
 @media (max-width: 600px) {
-    main { padding: 0.5rem; }
+    main {
+        padding: 0.5rem;
+    }
 }
 
 a {
@@ -85,5 +97,5 @@ h4,
 h5,
 h6,
 p {
-    color: var(--text-primary)
+    color: var(--text-primary);
 }

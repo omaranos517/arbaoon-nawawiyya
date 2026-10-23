@@ -2,6 +2,7 @@
   "name": "arbaoon-nawawiyya",
   "version": "0.1.0",
   "description": "الأربعون النووية",
+  "desktopName": "arbaoon-nawawiyya.desktop",
   "author": "Omar Anoss",
   "private": true,
   "type": "module",
@@ -18,7 +19,7 @@
     "gen": "node scripts/gen-packaging.mjs",
     "android": "npm run build:app && node scripts/gen-capacitor.mjs && cap sync android",
     "electron:win": "npm run build:app && electron-builder --win --config electron-builder.config.mjs",
-    "electron:linux": "npm run build:app && electron-builder --linux --config electron-builder.config.mjs"
+    "electron:linux": "npm run build:app && electron-builder --linux flatpak --config electron-builder.config.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.3",

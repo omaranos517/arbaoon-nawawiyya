@@ -1,12 +1,16 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('node:path')
-import { readFileSync } from 'node:fs'
+import { app, BrowserWindow } from 'electron'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+// import { readFileSync } from 'node:fs'
 
-const cfg = JSON.parse(readFileSync(new URL('../app.config.json', import.meta.url)))
-app.setAppUserModelId(cfg.appId)
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// const cfg = JSON.parse(readFileSync(new URL('../app.config.json', import.meta.url)))
+// app.setAppUserModelId(cfg.appId)
 
 function createWindow() {
     const win = new BrowserWindow({
+        autoHideMenuBar: true,
         width: 1200,
         height: 800,
         minWidth: 800,
