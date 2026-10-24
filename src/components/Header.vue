@@ -15,10 +15,10 @@ function handleAboutClick() {
 }
 function handleLogoClick() {
     if (isHomePage.value) {
-        console.log("it works!")
+        // console.log('it works!')
         window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
-        router.replace({ name: 'home'})
+        router.replace({ name: 'home' })
     }
 }
 </script>
