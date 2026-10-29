@@ -17,7 +17,7 @@
     "build:web": "vite build --mode web",
     "build:app": "vite build --mode app",
     "gen": "node scripts/gen-packaging.mjs",
-    "android": "npm run build:app && node scripts/gen-capacitor.mjs && cap sync android",
+    "android": "npm run build:app && node scripts/gen-capacitor.mjs && npx capacitor-assets generate --android --iconBackgroundColor '#f8f5ec' --splashBackgroundColor '#f8f5ec' && cap sync android",
     "electron:win": "npm run build:app && electron-builder --win --config electron-builder.config.mjs",
     "electron:linux": "npm run build:app && electron-builder --linux flatpak --config electron-builder.config.mjs"
   },

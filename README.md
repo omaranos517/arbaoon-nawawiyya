@@ -8,9 +8,33 @@ An Islamic reading app for the Forty Hadith of Imam al-Nawawi, with explanations
 
 ## Development
 
+### Requirements
+
+This project pins its tool versions in `mise.toml`. Install [mise](https://mise.jdx.dev) once, then every version is handled automatically.
+
+**Linux (zsh):**
+```sh
+curl https://mise.run | sh
+echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+```
+
+**Linux (bash):**
+```sh
+curl https://mise.run | sh
+echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+```
+
+**Windows (PowerShell):**
+```powershell
+winget install jdx.mise
+if (!(Test-Path -Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force }
+Add-Content $PROFILE '(&mise activate pwsh) | Out-String | Invoke-Expression'
+```
+
 ### Project Setup
 
 ```sh
+mise install
 npm install
 ```
 
@@ -23,6 +47,5 @@ npm run dev
 ### Compile and Minify for Production
 
 ```sh
-npm run build
-npx cap sync
+npm run android
 ```
