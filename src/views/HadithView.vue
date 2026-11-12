@@ -141,6 +141,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+    <!-- <div class="viewport-scroll-shadow" :class="{ visible: scrolled }" aria-hidden="true"></div> -->
     <main>
         <div ref="topSentinel" class="sentinel"></div>
         <div v-if="hadith" dir="rtl">
@@ -165,7 +166,14 @@ onBeforeUnmount(() => {
                 </div>
                 <p>{{ hadith.title }}</p>
             </div>
-            <div class="tabs" role="tablist">
+            <div
+                class="tabs"
+                role="tablist"
+                :style="{
+                    '--active-shift': `calc(-${tabs.findIndex((tab) => tab.key === active) * 100}% - ${tabs.findIndex((tab) => tab.key === active) * 0.25}rem)`,
+                }"
+            >
+                <span class="tab-indicator" aria-hidden="true"></span>
                 <button
                     v-for="tab in tabs"
                     :key="tab.key"
@@ -179,20 +187,27 @@ onBeforeUnmount(() => {
                 </button>
             </div>
 
-            <section class="panel" :class="active" :style="{ fontSize: `${fontSize}rem` }">
-                <template
-                    v-if="segments.length > 0"
-                    v-for="(seg, i) in segments"
-                    :key="i"
-                    id="main-text"
-                    ><span v-if="seg.quoted" class="quoted">{{ seg.text }}</span
-                    ><template v-else>{{ seg.text }}</template></template
+            <Transition name="content-switch" mode="out-in">
+                <section
+                    :key="active"
+                    class="panel"
+                    :class="active"
+                    :style="{ fontSize: `${fontSize}rem` }"
                 >
-                <template v-else>
-                    <h3 style="text-align: center">لا يوجد محتوى</h3>
-                    <p>قد يكون هذا الجزء تحت التطوير</p>
-                </template>
-            </section>
+                    <template
+                        v-if="segments.length > 0"
+                        v-for="(seg, i) in segments"
+                        :key="i"
+                        id="main-text"
+                        ><span v-if="seg.quoted" class="quoted">{{ seg.text }}</span
+                        ><template v-else>{{ seg.text }}</template></template
+                    >
+                    <template v-else>
+                        <h3 style="text-align: center">لا يوجد محتوى</h3>
+                        <p>قد يكون هذا الجزء تحت التطوير</p>
+                    </template>
+                </section>
+            </Transition>
         </div>
         <p v-else class="not-found">الحديث غير موجود</p>
         <div v-if="hadith" class="navication-buttons" :class="{ expanded: atBottom }" dir="rtl">
@@ -237,10 +252,27 @@ onBeforeUnmount(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* min-height: 9rem;
+    box-sizing: border-box; */
     padding: 0.75rem 0;
     background: var(--background);
     transition: padding 0.4s ease;
 }
+/* 
+.viewport-scroll-shadow {
+    position: fixed;
+    z-index: 1001;
+    inset: 0 0 auto;
+    height: 4rem;
+    background: linear-gradient(to bottom, rgba(201, 216, 64, 0.439), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.viewport-scroll-shadow.visible {
+    opacity: 1;
+} */
 
 .head-row {
     position: relative;
@@ -337,16 +369,46 @@ onBeforeUnmount(() => {
 }
 
 .tabs {
+    position: relative;
     display: flex;
     gap: 0.25rem;
     padding: 0.4rem;
-    background: var(--card);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(
+        150deg,
+        color-mix(in srgb, var(--surface-elevated) 72%, transparent),
+        color-mix(in srgb, var(--surface) 76%, transparent)
+    );
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-top-color: rgba(255, 255, 255, 0.22);
     border-radius: 999px;
     margin-bottom: 1.5rem;
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tab-indicator {
+    position: absolute;
+    z-index: 0;
+    inset-block: 0.4rem;
+    right: 0.4rem;
+    width: calc((100% - 1.55rem) / 4);
+    border-radius: 999px;
+    background: linear-gradient(145deg, #f0c18e, var(--primary) 58%, #bd8757);
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.48),
+        inset 0 -2px 0 rgba(97, 55, 20, 0.18);
+    transform: translateX(var(--active-shift));
+    transition: transform 0.5s cubic-bezier(0.25, 1.3, 0.75, 1);
+    pointer-events: none;
 }
 
 .tab {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -362,7 +424,9 @@ onBeforeUnmount(() => {
     cursor: pointer;
     transition:
         background-color 0.2s ease,
-        color 0.2s ease;
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
 
 .tab .icon {
@@ -375,12 +439,12 @@ onBeforeUnmount(() => {
 
 .tab:hover:not(.active) {
     color: var(--text-primary);
-    background: var(--surface-elevated);
+    background: transparent;
 }
 
 .tab.active {
-    background: var(--primary);
-    color: #12181c;
+    color: #2a1b11;
+    background: transparent;
 }
 
 .tab.active .icon {
@@ -388,15 +452,51 @@ onBeforeUnmount(() => {
 }
 
 .panel {
-    background: var(--card);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--surface-elevated) 84%, var(--bg)),
+        color-mix(in srgb, var(--surface) 94%, var(--bg)) 58%,
+        var(--surface)
+    );
     color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-top-color: rgba(255, 255, 255, 0.2);
     border-inline-start: 4px solid var(--warning);
-    border-radius: 12px;
+    border-radius: 1.25rem;
     padding: 1.5rem;
     font-size: 1.4rem;
     line-height: 2.2;
     white-space: pre-line;
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.content-switch-enter-active,
+.content-switch-leave-active {
+    transition:
+        opacity 0.18s ease,
+        transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.content-switch-enter-from {
+    opacity: 0.9;
+    transform: translateY(-6px);
+}
+
+.content-switch-leave-to {
+    opacity: 0.9;
+    transform: translateY(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .content-switch-enter-active,
+    .content-switch-leave-active {
+        transition: none;
+    }
 }
 
 /* الشرح والراوي نص طويل، فخط أصغر */

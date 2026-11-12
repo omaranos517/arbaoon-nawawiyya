@@ -38,8 +38,8 @@ const props = defineProps({
 
 .num {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width: 55px;
+    height: 55px;
     display: grid;
     place-items: center;
     border-radius: 100%;
@@ -57,13 +57,13 @@ const props = defineProps({
 }
 
 small {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: #8b949e;
 }
 
 h2 {
     margin: 0;
-    font-size: 1.07rem;
+    font-size: 1.11rem;
     font-weight: 700;
     line-height: 1.5;
 }
