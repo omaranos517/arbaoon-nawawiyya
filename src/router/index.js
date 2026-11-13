@@ -30,6 +30,11 @@ const router = createRouter({
             component: () => import('../views/HadithView.vue'),
             meta: { parent: 'home' },
         },
+        {
+            path: '/empty',
+            name: 'empty',
+            component: () => import('../views/EmptyView.vue'),
+        },
     ],
 })
 

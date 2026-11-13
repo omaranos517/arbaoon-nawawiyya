@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
                 </button>
             </div>
 
-            <Transition name="content-switch" mode="out-in">
+            <Transition name="fade" mode="out-in">
                 <section
                     :key="active"
                     class="panel"
@@ -297,6 +297,7 @@ onBeforeUnmount(() => {
     padding: 0;
     color: var(--primary);
     background: color-mix(in srgb, var(--primary) 16%, transparent);
+    /* background: color-mix(in srgb, var(--primary) 22%, var(--surface)); */
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     backdrop-filter: blur(14px) saturate(140%);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -322,6 +323,7 @@ onBeforeUnmount(() => {
         background: var(--surface-elevated);
     }
 }
+
 .head h2 {
     min-width: 0;
     max-width: 100%;
@@ -373,20 +375,10 @@ onBeforeUnmount(() => {
     display: flex;
     gap: 0.25rem;
     padding: 0.4rem;
-    background: linear-gradient(
-        150deg,
-        color-mix(in srgb, var(--surface-elevated) 72%, transparent),
-        color-mix(in srgb, var(--surface) 76%, transparent)
-    );
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    backdrop-filter: blur(14px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-top-color: rgba(255, 255, 255, 0.22);
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 999px;
     margin-bottom: 1.5rem;
-    box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .tab-indicator {
@@ -396,11 +388,12 @@ onBeforeUnmount(() => {
     right: 0.4rem;
     width: calc((100% - 1.55rem) / 4);
     border-radius: 999px;
-    background: linear-gradient(145deg, #f0c18e, var(--primary) 58%, #bd8757);
-    box-shadow:
+    background: var(--primary);
+    /* box-shadow:
         0 5px 12px rgba(0, 0, 0, 0.24),
         inset 0 1px 0 rgba(255, 255, 255, 0.48),
-        inset 0 -2px 0 rgba(97, 55, 20, 0.18);
+        inset 0 -2px 0 rgba(97, 55, 20, 0.18); */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.24);
     transform: translateX(var(--active-shift));
     transition: transform 0.5s cubic-bezier(0.25, 1.3, 0.75, 1);
     pointer-events: none;
@@ -425,7 +418,6 @@ onBeforeUnmount(() => {
     transition:
         background-color 0.2s ease,
         color 0.2s ease,
-        box-shadow 0.2s ease,
         transform 0.2s ease;
 }
 
@@ -454,49 +446,31 @@ onBeforeUnmount(() => {
 .panel {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(
+    /* background: linear-gradient(
         145deg,
         color-mix(in srgb, var(--surface-elevated) 84%, var(--bg)),
         color-mix(in srgb, var(--surface) 94%, var(--bg)) 58%,
         var(--surface)
-    );
+    ); */
+    background: var(--card);
     color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-top-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-inline-start: 4px solid var(--warning);
     border-radius: 1.25rem;
     padding: 1.5rem;
     font-size: 1.4rem;
     line-height: 2.2;
     white-space: pre-line;
-    box-shadow:
-        0 14px 30px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 
-.content-switch-enter-active,
-.content-switch-leave-active {
-    transition:
-        opacity 0.18s ease,
-        transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.15s ease;
 }
 
-.content-switch-enter-from {
-    opacity: 0.9;
-    transform: translateY(-6px);
-}
-
-.content-switch-leave-to {
-    opacity: 0.9;
-    transform: translateY(6px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .content-switch-enter-active,
-    .content-switch-leave-active {
-        transition: none;
-    }
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 
 /* الشرح والراوي نص طويل، فخط أصغر */

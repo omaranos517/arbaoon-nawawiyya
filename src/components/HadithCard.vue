@@ -38,8 +38,8 @@ const props = defineProps({
 
 .num {
     flex-shrink: 0;
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     display: grid;
     place-items: center;
     border-radius: 100%;
