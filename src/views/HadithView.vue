@@ -29,6 +29,7 @@ const active = ref('text')
 
 // المحتوى بيتحسب من التبويب النشط، والمفتاح هو نفس اسم الحقل في hadiths.js
 const content = computed(() => hadith.value?.[active.value] ?? '')
+const activeIndex = computed(() => tabs.findIndex((t) => t.key === active.value))
 
 const QUOTED = /("[^"]*"|“[^”]*”|«[^»]*»|\([^)]*\)|\{[^}]*\}|'[^']*')/
 const segments = computed(() =>
@@ -147,6 +148,14 @@ onBeforeUnmount(() => {
         <div v-if="hadith" dir="rtl">
             <div class="head" :class="{ compact: scrolled }">
                 <div class="head-row">
+                    <RouterLink to="/" class="home-btn" aria-label="العودة للرئيسية">
+                        <ArrowIcon />
+                    </RouterLink>
+
+                    <div class="num-wrap" :style="{ '--len': String(hadith.num).length }">
+                        <h2>{{ hadith.num }}</h2>
+                    </div>
+
                     <button
                         ref="optionsBtn"
                         class="options-btn"
@@ -157,12 +166,6 @@ onBeforeUnmount(() => {
                     >
                         <OptionsIcon />
                     </button>
-                    <RouterLink to="/" class="home-btn" aria-label="العودة للرئيسية">
-                        <ArrowIcon />
-                    </RouterLink>
-                    <h2 :style="{ '--num-fit': 1 / String(hadith.num).length }">
-                        {{ hadith.num }}
-                    </h2>
                 </div>
                 <p>{{ hadith.title }}</p>
             </div>
@@ -170,6 +173,8 @@ onBeforeUnmount(() => {
                 class="tabs"
                 role="tablist"
                 :style="{
+                    '--i': activeIndex,
+                    '--n': tabs.length,
                     '--active-shift': `calc(-${tabs.findIndex((tab) => tab.key === active) * 100}% - ${tabs.findIndex((tab) => tab.key === active) * 0.25}rem)`,
                 }"
             >
@@ -258,6 +263,7 @@ onBeforeUnmount(() => {
     background: var(--background);
     transition: padding 0.4s ease;
 }
+
 /* 
 .viewport-scroll-shadow {
     position: fixed;
@@ -276,19 +282,17 @@ onBeforeUnmount(() => {
 
 .head-row {
     position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
     justify-content: center;
-    padding-inline: 3.5rem;
     gap: 0.5rem;
     width: 100%;
 }
 
 .home-btn,
 .options-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    position: static;
     display: grid;
     place-items: center;
     width: 3.7rem;
@@ -310,11 +314,11 @@ onBeforeUnmount(() => {
         background-color 0.2s ease;
 }
 
-.home-btn {
-    inset-inline-start: 0;
-}
-.options-btn {
-    inset-inline-end: 0;
+.num-wrap {
+    container-type: inline-size;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
 }
 
 @media (hover: hover) {
@@ -329,7 +333,8 @@ onBeforeUnmount(() => {
     max-width: 100%;
     margin: 0;
     padding: 0.35rem 1.25rem;
-    font-size: clamp(0.95rem, calc(90vw * var(--num-fit)), 2.3rem);
+    font-size: clamp(0.95rem, 7vw, 2.3rem); /* fallback */
+    font-size: clamp(0.95rem, calc((100cqw - 2.5rem) / (var(--len) * 0.4)), 2.3rem);
     white-space: nowrap;
     overflow: hidden;
     color: var(--primary);
@@ -362,7 +367,7 @@ onBeforeUnmount(() => {
 }
 
 .head.compact h2 {
-    font-size: clamp(0.95rem, calc(62vw * var(--num-fit)), 1.5rem);
+    font-size: clamp(0.95rem, calc((100cqw - 2.25rem) / (var(--len) * 0.4)), 1.5rem);
     padding: 0.25rem 1rem;
 }
 
@@ -386,7 +391,11 @@ onBeforeUnmount(() => {
     z-index: 0;
     inset-block: 0.4rem;
     right: 0.4rem;
-    width: calc((100% - 1.55rem) / 4);
+    /* width: calc((100% - 1.55rem) / 4); */
+    /* transform: translateX(var(--active-shift)); */
+    /* Have made using the AI */
+    width: calc((100% - 0.8rem - (var(--n) - 1) * 0.25rem) / var(--n));
+    transform: translateX(calc(var(--i) * (-100% - 0.25rem)));
     border-radius: 999px;
     background: var(--primary);
     /* box-shadow:
@@ -394,7 +403,6 @@ onBeforeUnmount(() => {
         inset 0 1px 0 rgba(255, 255, 255, 0.48),
         inset 0 -2px 0 rgba(97, 55, 20, 0.18); */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.24);
-    transform: translateX(var(--active-shift));
     transition: transform 0.5s cubic-bezier(0.25, 1.3, 0.75, 1);
     pointer-events: none;
 }
