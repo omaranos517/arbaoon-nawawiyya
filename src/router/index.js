@@ -2,6 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 let homeScrollPosition = 0
 
+const afterNextPaint = () =>
+    new Promise((resolve) => {
+        // RouterView uses an out-in transition (250 ms), so wait for the
+        // incoming home view to mount before applying its saved position.
+        window.setTimeout(() => {
+            requestAnimationFrame(() => requestAnimationFrame(resolve))
+        }, 300)
+    })
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     scrollBehavior(to, from, savedPosition) {
@@ -9,15 +18,9 @@ const router = createRouter({
         if (savedPosition) return savedPosition
 
         // The native Android back button replaces the route, so it has no
-        // browser history position to restore. Keep the home list position
-        // while a hadith is open and restore it when returning.
-        if (from.name === 'home' && to.name === 'hadith') {
-            homeScrollPosition = window.scrollY
-        }
+        // browser history position to restore.
         if (to.name === 'home' && from.name === 'hadith') {
-            return new Promise((resolve) => {
-                window.setTimeout(() => resolve({ top: homeScrollPosition }), 260)
-            })
+            return afterNextPaint().then(() => ({ top: homeScrollPosition }))
         }
 
         // Start each newly opened page at the top.
@@ -50,6 +53,14 @@ const router = createRouter({
             component: () => import('../views/EmptyView.vue'),
         },
     ],
+})
+
+// Capture before the route transition starts. On Android, the outgoing view
+// can change the WebView's scroll position before scrollBehavior runs.
+router.beforeEach((to, from) => {
+    if (from.name === 'home' && to.name === 'hadith') {
+        homeScrollPosition = window.scrollY || document.documentElement.scrollTop
+    }
 })
 
 export default router
